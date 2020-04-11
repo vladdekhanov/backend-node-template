@@ -1,10 +1,9 @@
 {
   "name": "backend-node-template",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "description": "Template for backend service based on Node.js",
+  "author": "Vladislav Dekhanov <vladdexx@yandex.ru> (https://vladislavdekhanov.xyz/)",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
