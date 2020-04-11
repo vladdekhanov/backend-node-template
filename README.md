@@ -1,4 +1,8 @@
-# Backend Node Template
+# Backend Node Template  
+![GitHub](https://img.shields.io/github/license/vladdekhanov/backend-node-template)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/vladdekhanov/backend-node-template)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/vladdekhanov/backend-node-template)
+
 This is template repository for backend service based on Node.js.
 
 ## Installing
