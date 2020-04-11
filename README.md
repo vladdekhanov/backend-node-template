@@ -7,7 +7,7 @@ This is template repository for backend service based on Node.js.
 
 ## Installing
 
-[Click the link](https://github.com/vladdekhanov/backend-node-template/generate) to generate your repository on the Github with this template or simply clone it.
+[Click the link](https://github.com/vladdekhanov/backend-node-template/generate) to generate your repository on the Github from this template or simply clone it.
 
 ## Technical stack
 
