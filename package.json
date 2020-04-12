@@ -1,6 +1,6 @@
 {
   "name": "backend-node-template",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Template for backend service based on Node.js",
   "author": "Vladislav Dekhanov <vladdexx@yandex.ru> (https://vladislavdekhanov.xyz/)",
   "license": "MIT",
