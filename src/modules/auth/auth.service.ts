@@ -5,43 +5,40 @@ import * as bcrypt from 'bcrypt';
 import {JwtPayload} from '../../types/models';
 import {UserDto} from '../../types/models/dto';
 import {ResponseLoginDto} from '../../types/models/dto/response';
-import {RequestLoginDto, RequestRegisterUser} from '../../types/models/dto/request';
+import {RequestRegisterUser} from '../../types/models/dto/request';
 
 import {UsersService} from '../users/users.service';
-import {UsersMapper} from '../users/users.mapper';
 import {Config} from '../../config';
 
 @Injectable()
 export class AuthService {
 	constructor(
 		private readonly usersService: UsersService,
-		private readonly jwtService: JwtService,
-		private readonly usersMapper: UsersMapper
+		private readonly jwtService: JwtService
 	) {}
 
 	/**
 	 * Validation of the user
 	 */
-	async validate(name: string, password: string): Promise<UserDto | null> {
-		const user = await this.usersService.findByEmail(name);
+	async validate(email: string, password: string): Promise<UserDto | null> {
+		const user = await this.usersService.findIfMatch(
+			email,
+			password,
+			this.comparePasswords
+		);
 
 		if (!user) {
 			throw new UnauthorizedException();
 		}
 
-		const isMatch = await this.comparePasswords(password, user.passwordHash);
-		if (user && isMatch) {
-			return this.usersMapper.toDto(user);
-		}
-
-		return null;
+		return user;
 	}
 
 	/**
 	 * Signing jwt token for logged user
 	 */
-	async login({email}: RequestLoginDto): Promise<ResponseLoginDto | null> {
-		const user = await this.usersService.getUserByEmail(email);
+	async login(email: string): Promise<ResponseLoginDto | null> {
+		const user = await this.usersService.findByEmail(email);
 
 		if (user === null) {
 			throw new UnauthorizedException();
@@ -71,10 +68,10 @@ export class AuthService {
 	/**
 	 * Provide user without sensitive data from storage
 	 */
-	public async getUserByEmail(
+	public async findUserByEmail(
 		email: string
 	): Promise<UserDto | null> {
-		return this.usersService.getUserByEmail(email);
+		return this.usersService.findByEmail(email);
 	}
 
 	/**
