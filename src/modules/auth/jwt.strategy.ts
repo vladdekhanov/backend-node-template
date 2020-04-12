@@ -33,6 +33,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		const contextId = ContextIdFactory.getByRequest(request);
 		const authService = await this.moduleRef.resolve(AuthService, contextId);
 
-		return authService.getUserByEmail(email);
+		return authService.findUserByEmail(email);
 	}
 }

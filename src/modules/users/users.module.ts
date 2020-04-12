@@ -12,6 +12,6 @@ import {DBKeys} from '../../enums/DBKeys';
 	imports: [MongooseModule.forFeature([{name: DBKeys.User, schema: UsersSchema}])],
 	controllers: [UsersController],
 	providers: [UsersService, UsersMapper],
-	exports: [UsersService, UsersMapper]
+	exports: [UsersService]
 })
 export class UsersModule {}

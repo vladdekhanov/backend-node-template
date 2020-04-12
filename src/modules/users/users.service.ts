@@ -33,24 +33,8 @@ export class UsersService {
 	/**
 	 * Find the user by unique email
 	 */
-	async findByEmail(email: string): Promise<User | null> {
-		return this.userRepository.findOne({email}).exec();
-	}
-
-	/**
-	 * Find the user by id
-	 */
-	async find(userId: number): Promise<User | null> {
-		return this.userRepository.findById(userId).exec();
-	}
-
-	/**
-	 * Return user without sensitive data from storage
-	 */
-	public async getUserByEmail(
-		email: string
-	): Promise<UserDto | null> {
-		const user = await this.findByEmail(email);
+	async findByEmail(email: string): Promise<UserDto | null> {
+		const user = await this.userRepository.findOne({email}).exec();
 
 		if (user) {
 			return this.usersMapper.toDto(user);
@@ -60,12 +44,31 @@ export class UsersService {
 	}
 
 	/**
-	 * Return user without sensitive data from storage
+	 * Find the user by id
 	 */
-	public async getUser(userId: number): Promise<UserDto | null> {
-		const user = await this.find(userId);
+	async find(userId: string): Promise<UserDto | null> {
+		const user = await this.userRepository.findById(userId).exec();
 
 		if (user) {
+			return this.usersMapper.toDto(user);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Find the user if entered password hash matches with stored hash
+	 */
+	async findIfMatch(
+		email: string,
+		password: string,
+		compare: (password: string, userPasswordHash: string) => Promise<boolean>
+	): Promise<UserDto | null> {
+		const user = await this.userRepository.findOne({email}).exec();
+
+		const isMatch = await compare(password, user.passwordHash);
+
+		if (user && isMatch) {
 			return this.usersMapper.toDto(user);
 		}
 
