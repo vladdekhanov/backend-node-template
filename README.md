@@ -2,6 +2,8 @@
 ![GitHub](https://img.shields.io/github/license/vladdekhanov/backend-node-template)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/vladdekhanov/backend-node-template)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/vladdekhanov/backend-node-template)
+![Build](https://github.com/vladdekhanov/backend-node-template/workflows/Build/badge.svg)
+![Tests](https://github.com/vladdekhanov/backend-node-template/workflows/Tests/badge.svg)
 
 This is template repository for backend service based on Node.js.
 
