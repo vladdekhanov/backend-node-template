@@ -5,10 +5,9 @@ import * as bcrypt from 'bcrypt';
 import {JwtPayload} from '../../types/models';
 import {UserDto} from '../../types/models/dto';
 import {ResponseLoginDto} from '../../types/models/dto/response';
-import {RequestLoginDto, RequestRegisterUser} from '../../types/models/dto/request';
+import {RequestRegisterUser} from '../../types/models/dto/request';
 
 import {UsersService} from '../users/users.service';
-import {UsersMapper} from '../users/users.mapper';
 import {Config} from '../../config';
 
 @Injectable()
@@ -38,7 +37,7 @@ export class AuthService {
 	/**
 	 * Signing jwt token for logged user
 	 */
-	async login({email}: RequestLoginDto): Promise<ResponseLoginDto | null> {
+	async login(email: string): Promise<ResponseLoginDto | null> {
 		const user = await this.usersService.findByEmail(email);
 
 		if (user === null) {
